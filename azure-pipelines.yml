@@ -1,3 +1,4 @@
+
 trigger:
 - '*'
 
@@ -16,6 +17,7 @@ steps:
   displayName: 'Use .NET Core SDK $(dotnetSdkVersion)'
   inputs:
     version: '$(dotnetSdkVersion)'
+
 
 - task: UseDotNet@2
   displayName: 'Use .NET Core SDK 2.1.505 for SonarCloud'
@@ -42,6 +44,7 @@ steps:
   inputs:
     command: 'restore'
     projects: '**/*.csproj'
+
 
 - task: SonarCloudPrepare@1
   displayName: 'Prepare SonarCloud analysis'
@@ -70,6 +73,7 @@ steps:
     projects: '**/*.csproj'
 
 - task: DotNetCoreCLI@2
+
   displayName: 'Install ReportGenerator'
   inputs:
     command: custom
@@ -115,6 +119,7 @@ steps:
     summaryFileLocation: '$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
 
 - task: DotNetCoreCLI@2
+
   displayName: 'Publish the project - $(buildConfiguration)'
   inputs:
     command: 'publish'
@@ -126,3 +131,4 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
   condition: succeeded()
+
